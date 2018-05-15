@@ -11,15 +11,18 @@ license = "Apache-2.0"
 [dependencies]
 cortex-m = "0.5"
 
+[dependencies.log]
+version = "0.4"
+optional = true
+default-features = false
+
 [dependencies.cortex-m-semihosting]
 version = "0.3"
 optional = true
 
 [features]
-default = ["dummy"]
-dummy = []
-itm = []
 semihosting = ["cortex-m-semihosting"]
+log-integration = ["log"]
 
 [package.metadata.docs.rs]
-features = ["itm", "semihosting", "dummy"]
+features = ["semihosting", "log"]

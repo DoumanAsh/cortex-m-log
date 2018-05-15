@@ -1,10 +1,11 @@
 //! Crate configuration modes
 extern crate cortex_m;
 
+use core::marker;
 use self::cortex_m::interrupt;
 
 ///Trait to configure interrupt mode.
-pub trait InterruptModer {
+pub trait InterruptModer: marker::Send {
     #[doc(hidden)]
     fn critical_section<R, F: FnOnce(&interrupt::CriticalSection) -> R>(f: F) -> R;
 }
