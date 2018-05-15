@@ -1,6 +1,6 @@
 [package]
 name = "cortex-m-log"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Douman <douman@gmx.se>"]
 keywords = ["arm", "cortex-m", "stm32", "log"]
 description = "Logging facilities for Cortex-M processors"
@@ -25,4 +25,4 @@ semihosting = ["cortex-m-semihosting"]
 log-integration = ["log"]
 
 [package.metadata.docs.rs]
-features = ["semihosting", "log"]
+features = ["semihosting", "log-integration"]
