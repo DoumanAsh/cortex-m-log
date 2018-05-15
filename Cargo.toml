@@ -1,0 +1,30 @@
+[package]
+name = "cortex-log"
+version = "0.1.0"
+authors = ["Douman <douman@gmx.se>"]
+keywords = ["arm", "cortex-m", "stm32", "log"]
+description = "Logging facilities for Cortex-M processors"
+readme = "README.md"
+repository = "https://github.com/DoumanAsh/cortex-log"
+license = "Apache-2.0"
+
+[dependencies]
+cortex-m = "0.5"
+
+[dependencies.cortex-m-semihosting]
+version = "0.3"
+optional = true
+
+# Writing raw bytes requires aligned bytes
+[dependencies.aligned]
+version = "0.2"
+optional = true
+
+[features]
+default = ["dummy"]
+dummy = []
+itm = ["aligned"]
+semihosting = ["cortex-m-semihosting"]
+
+[package.metadata.docs.rs]
+features = ["itm", "semihosting", "dummy"]

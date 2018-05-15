@@ -1,0 +1,39 @@
+language: rust
+
+matrix:
+  include:
+    - env: TARGET=thumbv7em-none-eabi
+      rust: beta
+      addons:
+        apt:
+          packages:
+            - gcc-arm-none-eabi
+    - env: TARGET=thumbv7em-none-eabihf
+      rust: beta
+      addons:
+        apt:
+          packages:
+            - gcc-arm-none-eabi
+
+cache: cargo
+
+before_install:
+  - set -e
+  - rustup self update
+
+install:
+  - rustup target add $TARGET || true
+
+script:
+  - cargo check --target $TARGET --features itm,semihosting
+
+after_script:
+  - set +e
+
+before_cache:
+  # Travis can't cache files that are not readable by "others"
+  - chmod -R a+r $HOME/.cargo
+
+notifications:
+  email:
+    on_success: never
