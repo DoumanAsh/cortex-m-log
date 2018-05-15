@@ -1,5 +1,5 @@
 [package]
-name = "cortex-log"
+name = "cortex-m-log"
 version = "0.1.0"
 authors = ["Douman <douman@gmx.se>"]
 keywords = ["arm", "cortex-m", "stm32", "log"]
@@ -15,15 +15,10 @@ cortex-m = "0.5"
 version = "0.3"
 optional = true
 
-# Writing raw bytes requires aligned bytes
-[dependencies.aligned]
-version = "0.2"
-optional = true
-
 [features]
 default = ["dummy"]
 dummy = []
-itm = ["aligned"]
+itm = []
 semihosting = ["cortex-m-semihosting"]
 
 [package.metadata.docs.rs]

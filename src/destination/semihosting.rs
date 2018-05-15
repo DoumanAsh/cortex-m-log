@@ -1,9 +1,7 @@
 //! Semihosting module
 
-extern crate cortex_m;
 extern crate cortex_m_semihosting as sh;
 
-use self::cortex_m::interrupt;
 use core::fmt;
 use core::fmt::Write;
 
@@ -13,7 +11,7 @@ pub trait SemihostingComp: Write {}
 impl SemihostingComp for sh::hio::HStdout {}
 impl SemihostingComp for sh::hio::HStderr {}
 
-/// Semihosting logger
+/// Semihosting destination
 pub struct SH<T: SemihostingComp> {
     inner: T,
 }
@@ -25,8 +23,9 @@ impl<T: SemihostingComp> SH<T> {
 }
 
 impl<T: SemihostingComp> Write for SH<T> {
+    #[inline]
     fn write_str(&mut self, s: &str) -> fmt::Result {
-        interrupt::free(|_| self.inner.write_str(s))
+        self.inner.write_str(s)
     }
 }
 

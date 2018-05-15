@@ -5,17 +5,7 @@
 
 extern crate cortex_m;
 
-#[cfg(feature = "dummy")]
-pub mod dummy;
-#[cfg(feature = "dummy")]
-pub use dummy::Dummy;
+pub mod modes;
+pub mod destination;
+pub mod printer;
 
-#[cfg(feature = "itm")]
-pub mod itm;
-#[cfg(feature = "itm")]
-pub use itm::Itm;
-
-#[cfg(feature = "semihosting")]
-pub mod semihosting;
-#[cfg(feature = "semihosting")]
-pub use semihosting::{SHerr, SHout};
