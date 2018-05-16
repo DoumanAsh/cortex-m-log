@@ -33,19 +33,20 @@
 //!
 //! use std::mem;
 //!
-//! use cortex_m_semihosting::hio;
-//! use cortex_m_log::log::{Logger, init};
-//! use cortex_m_log::printer::Semihosting;
+//! use cortex_m_log::log::{Logger, trick_init};
+//! use cortex_m_log::printer::semihosting;
 //! use cortex_m_log::modes::InterruptOk;
 //!
 //! fn main() {
-//!     let stdout = hio::hstdout().expect("Get Semihosting output");
-//!     let mut logger = Logger {
-//!         inner: Semihosting::<hio::HStdout, InterruptOk>::new(stdout),
+//!     let logger = Logger {
+//!         inner: semihosting::InterruptOk::<_>::stdout().expect("Get Semihosting stdout"),
 //!         level: log::LevelFilter::Info
 //!     };
-//!
-//!     init::<Semihosting<hio::HStdout, InterruptOk>>(unsafe { mem::transmute(&mut logger) });
+//!     //Haha trust me, it is safe ;)
+//!     //As long as logger is not dropped....
+//!     unsafe {
+//!         let _ = trick_init(&logger);
+//!     }
 //! }
 //! ```
 //!
@@ -53,6 +54,7 @@
 extern crate log;
 extern crate cortex_m_semihosting as sh;
 
+use core::mem;
 use core::marker;
 use ::printer::Printer;
 
@@ -83,9 +85,6 @@ impl<P: Printer + marker::Send + marker::Sync> log::Log for Logger<P> {
     }
 }
 
-//TODO: Seems like type annotation is required
-//      in this case which may be annoying
-//      consider to change it
 ///Initialize logging facilities.
 ///
 ///Currently lacks a nice way to set global logger so user
@@ -93,4 +92,14 @@ impl<P: Printer + marker::Send + marker::Sync> log::Log for Logger<P> {
 pub fn init<P: Printer + marker::Send + marker::Sync>(logger: &'static Logger<P>) -> Result<(), log::SetLoggerError> {
     log::set_max_level(logger.level.clone());
     log::set_logger(logger)
+}
+
+#[inline]
+///Performs init by tricking compiler into beliving that `&mut` is static.
+///
+///This is unsafe and it is up to you to ensure that reference
+///will live longer that any attempts to access it
+pub unsafe fn trick_init<P: Printer + marker::Send + marker::Sync + 'static>(logger: &Logger<P>) -> Result<(), log::SetLoggerError> {
+    let logger: &'static Logger<P> = mem::transmute(logger);
+    init(logger)
 }

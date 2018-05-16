@@ -1,6 +1,6 @@
 [package]
 name = "cortex-m-log"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Douman <douman@gmx.se>"]
 keywords = ["arm", "cortex-m", "stm32", "log"]
 description = "Logging facilities for Cortex-M processors"

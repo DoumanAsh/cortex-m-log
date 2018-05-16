@@ -8,5 +8,5 @@ Logging facilities for Cortex-M processors
 
 ## Available features
 
-- `log` - Enables [log](https://github.com/rust-lang-nursery/log) integration
+- `log-integration` - Enables [log](https://github.com/rust-lang-nursery/log) integration
 - `semihosting` - Enables facilities for [cortex-m-semihosting](https://github.com/japaric/cortex-m-semihosting).
