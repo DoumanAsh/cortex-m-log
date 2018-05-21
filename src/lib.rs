@@ -35,7 +35,7 @@
 //!     //Note that you must import print macro for it to work
 //!     d_print!(log, "Print stuff: {}", "stuff");
 //!     //Note that you must import println macro for it to work
-//!     d_print!(log, "Print stuff: {} and also newline", "stuff");
+//!     d_println!(log, "Print stuff: {} and also newline", "stuff");
 //! }
 //! ```
 

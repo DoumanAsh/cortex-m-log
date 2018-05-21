@@ -9,6 +9,10 @@ pub trait Printer {
     type W: fmt::Write;
     type M: InterruptModer;
 
+    ///Returns destination writer.
+    ///
+    ///Used by `print` and `println` default
+    ///impls
     fn destination(&mut self) -> &mut Self::W;
 
     #[inline]

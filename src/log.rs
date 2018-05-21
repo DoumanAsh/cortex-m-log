@@ -95,7 +95,7 @@ pub fn init<P: Printer + marker::Send + marker::Sync>(logger: &'static Logger<P>
 }
 
 #[inline]
-///Performs init by tricking compiler into beliving that `&mut` is static.
+///Performs init by tricking compiler into beliving that `&Logger` is static.
 ///
 ///This is unsafe and it is up to you to ensure that reference
 ///will live longer that any attempts to access it
