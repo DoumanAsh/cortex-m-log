@@ -23,6 +23,7 @@ optional = true
 [features]
 semihosting = ["cortex-m-semihosting"]
 log-integration = ["log"]
+itm = []
 
 [package.metadata.docs.rs]
 features = ["semihosting", "log-integration"]
