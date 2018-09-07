@@ -5,7 +5,7 @@
 //! The crate provides following destinations for writes:
 //! - [Dummy](destination/dummy/struct.Dummy.html) - noop destination that performs no writes. Useful for release mode
 //! - [Itm](destination/itm/struct.Itm.html) - Uses Cortex-M [Itm](https://docs.rs/cortex-m/0.5.1/cortex_m/itm/index.html) to send output. Note that it is available only on ARMv7-M and newer
-//! - [Semihosting](destination/semihosting/struct.SemihostingComp.html) - Uses Cortex-M [Semihosting](https://docs.rs/cortex-m-semihosting) to send output.
+//! - [Semihosting](destination/semihosting/trait.SemihostingComp.html) - Uses Cortex-M [Semihosting](https://docs.rs/cortex-m-semihosting) to send output.
 //!
 //! All destinations implements [fmt::Write](https://doc.rust-lang.org/core/fmt/trait.Write.html)
 //! to provide simple and generic interface
@@ -22,7 +22,7 @@
 //! Controlled by `debug_assertions` attribute
 //!
 //! ```rust
-//! #[macro_use(print, println, d_print)]
+//! #[macro_use(print, println, d_print, d_println)]
 //! extern crate cortex_m_log;
 //! extern crate log;
 //!

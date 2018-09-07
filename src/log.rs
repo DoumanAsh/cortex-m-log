@@ -5,6 +5,7 @@
 //!
 //! ```rust
 //! extern crate cortex_m_log;
+//! #[macro_use]
 //! extern crate log;
 //!
 //! use cortex_m_log::log::{Logger, init};
@@ -17,6 +18,8 @@
 //!
 //! fn main() {
 //!     init(&LOGGER).expect("To set logger");
+//!
+//!     info!("Starting my cute program");
 //! }
 //! ```
 //!
@@ -39,6 +42,7 @@
 //!
 //! fn main() {
 //!     let logger = Logger {
+//!         //Uses semihosting as destination with no interrupt control.
 //!         inner: semihosting::InterruptOk::<_>::stdout().expect("Get Semihosting stdout"),
 //!         level: log::LevelFilter::Info
 //!     };

@@ -1,4 +1,28 @@
 //! Semihosting module
+//!
+//! Semihosting can direct to either stdout or stderr,
+//! which is determined by second type parameter
+//!
+//! ## Example
+//!
+//! ```rust,no_run
+//! extern crate cortex_m_log;
+//!
+//! use cortex_m_log::printer::Printer;
+//! use cortex_m_log::printer::semihosting;
+//! use cortex_m_log::printer::semihosting::Semihosting;
+//! use cortex_m_log::modes::InterruptFree;
+//!
+//! //Create new printer to stdout with interrupt free mode
+//! let mut shost = Semihosting::<InterruptFree, _>::stdout().unwrap();
+//!
+//! shost.println(format_args!("Write interrupt free to {}", "stdout"));
+//!
+//! //Create new printer to stderr without need for interrupt control using special alias
+//! let mut shost = semihosting::InterruptOk::<_>::stderr().unwrap();
+//!
+//! shost.println(format_args!("Write to {}", "stderr"));
+//! ```
 
 extern crate cortex_m;
 extern crate cortex_m_semihosting as sh;
