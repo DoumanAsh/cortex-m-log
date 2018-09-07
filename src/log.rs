@@ -56,7 +56,6 @@
 //!
 //! Obviously it is UB to drop logger after that and use any of log's macros
 extern crate log;
-extern crate cortex_m_semihosting as sh;
 
 use core::mem;
 use core::marker;
