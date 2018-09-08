@@ -27,7 +27,7 @@
 extern crate cortex_m;
 extern crate cortex_m_semihosting as sh;
 
-use self::sh::hio;
+pub use self::sh::hio;
 
 use ::destination::semihosting::SemihostingComp;
 use ::modes::InterruptModer;
