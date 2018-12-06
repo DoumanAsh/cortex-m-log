@@ -6,8 +6,6 @@
 //! ## Example
 //!
 //! ```rust,no_run
-//! extern crate cortex_m_log;
-//!
 //! use cortex_m_log::printer::Printer;
 //! use cortex_m_log::printer::semihosting;
 //! use cortex_m_log::printer::semihosting::Semihosting;
@@ -24,13 +22,12 @@
 //! shost.println(format_args!("Write to {}", "stderr"));
 //! ```
 
-extern crate cortex_m;
 extern crate cortex_m_semihosting as sh;
 
 pub use self::sh::hio;
 
-use ::destination::semihosting::SemihostingComp;
-use ::modes::InterruptModer;
+use crate::destination::semihosting::SemihostingComp;
+use crate::modes::InterruptModer;
 
 use core::marker::PhantomData;
 
@@ -72,6 +69,6 @@ impl<Mode: InterruptModer, T: SemihostingComp> super::Printer for Semihosting<Mo
 }
 
 /// Alias for Interrupt free Printer
-pub type InterruptFree<T> = Semihosting<::modes::InterruptFree, T>;
+pub type InterruptFree<T> = Semihosting<crate::modes::InterruptFree, T>;
 /// Alias for Printer without control over interrupts
-pub type InterruptOk<T> = Semihosting<::modes::InterruptOk, T>;
+pub type InterruptOk<T> = Semihosting<crate::modes::InterruptOk, T>;

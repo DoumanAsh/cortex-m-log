@@ -2,8 +2,8 @@
 
 extern crate cortex_m;
 
-use ::destination;
-use ::modes::InterruptModer;
+use crate::destination;
+use crate::modes::InterruptModer;
 
 use core::marker::PhantomData;
 
@@ -31,6 +31,6 @@ impl<Mode: InterruptModer> super::Printer for Itm<Mode> {
 }
 
 /// Alias for Interrupt free Printer
-pub type InterruptFree = Itm<::modes::InterruptFree>;
+pub type InterruptFree = Itm<crate::modes::InterruptFree>;
 /// Alias for Printer without control over interrupts
-pub type InterruptOk = Itm<::modes::InterruptOk>;
+pub type InterruptOk = Itm<crate::modes::InterruptOk>;

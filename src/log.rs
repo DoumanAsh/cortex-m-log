@@ -4,10 +4,7 @@
 //! our logger so instead simplest approach would be to declare our logger static
 //!
 //! ```rust
-//! extern crate cortex_m_log;
-//! #[macro_use]
-//! extern crate log;
-//!
+//! use log::info;
 //! use cortex_m_log::log::{Logger, init};
 //! use cortex_m_log::printer::Dummy;
 //!
@@ -30,10 +27,6 @@
 //! allocated logger to static, obviously unsafe.
 //!
 //! ```rust,no_run
-//! extern crate cortex_m_log;
-//! extern crate log;
-//! extern crate cortex_m_semihosting;
-//!
 //! use std::mem;
 //!
 //! use cortex_m_log::log::{Logger, trick_init};
@@ -55,11 +48,9 @@
 //! ```
 //!
 //! Obviously it is UB to drop logger after that and use any of log's macros
-extern crate log;
-
 use core::mem;
 use core::marker;
-use ::printer::Printer;
+use crate::printer::Printer;
 
 ///Simple Logger implementation
 pub struct Logger<P: Printer + marker::Send + marker::Sync> {

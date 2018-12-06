@@ -1,8 +1,6 @@
 //! ITM module
 
-extern crate cortex_m;
-
-use self::cortex_m::{itm};
+use cortex_m::{itm};
 use core::fmt;
 
 /// ITM based destination

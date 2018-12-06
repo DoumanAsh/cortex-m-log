@@ -6,8 +6,8 @@ use core::fmt;
 pub struct Dummy;
 
 impl super::Printer for Dummy {
-    type W = ::destination::Dummy;
-    type M = ::modes::InterruptFree;
+    type W = crate::destination::Dummy;
+    type M = crate::modes::InterruptFree;
 
     #[inline]
     fn destination(&mut self) -> &mut Self::W {

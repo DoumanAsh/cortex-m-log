@@ -22,10 +22,7 @@
 //! Controlled by `debug_assertions` attribute
 //!
 //! ```rust
-//! #[macro_use(print, println, d_print, d_println)]
-//! extern crate cortex_m_log;
-//! extern crate log;
-//!
+//! use cortex_m_log::{print, println, d_print, d_println};
 //! use cortex_m_log::printer::Dummy;
 //!
 //! fn main() {
@@ -40,8 +37,6 @@
 //! ```
 
 #![no_std]
-
-extern crate cortex_m;
 
 pub mod modes;
 pub mod destination;

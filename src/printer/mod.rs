@@ -2,7 +2,7 @@
 
 use core::fmt;
 use core::fmt::Write;
-use ::modes::{InterruptModer};
+use crate::modes::{InterruptModer};
 
 ///Generic Printer trait
 pub trait Printer {

@@ -1,7 +1,5 @@
 //! Crate configuration modes
-extern crate cortex_m;
-
-use self::cortex_m::interrupt;
+use cortex_m::interrupt;
 
 ///Trait to configure interrupt mode.
 pub trait InterruptModer {
