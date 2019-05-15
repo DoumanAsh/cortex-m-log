@@ -3,13 +3,13 @@ language: rust
 matrix:
   include:
     - env: TARGET=thumbv7em-none-eabi
-      rust: beta
+      rust: stable
       addons:
         apt:
           packages:
             - gcc-arm-none-eabi
     - env: TARGET=thumbv7em-none-eabihf
-      rust: beta
+      rust: stable
       addons:
         apt:
           packages:

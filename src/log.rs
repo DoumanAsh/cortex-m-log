@@ -1,6 +1,6 @@
 //! Integration with [log](https://docs.rs/crate/log)
 //!
-//! As embedded development implies `#[no_st]` we cannot box
+//! As embedded development implies `#[no_std]` we cannot box
 //! our logger so instead simplest approach would be to declare our logger static
 //!
 //! ```rust

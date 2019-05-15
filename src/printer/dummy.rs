@@ -4,13 +4,13 @@ use core::fmt;
 
 /// Dummy printer
 pub struct Dummy {
-    w: crate::destination::Dummy,
+    inner: crate::destination::Dummy,
 }
 
 impl Dummy {
     /// Create dummy printer
-    pub fn new() -> Self {
-        Dummy { w: crate::destination::Dummy }
+    pub const fn new() -> Self {
+        Dummy { inner: crate::destination::Dummy }
     }
 }
 
@@ -20,7 +20,7 @@ impl super::Printer for Dummy {
 
     #[inline]
     fn destination(&mut self) -> &mut Self::W {
-        &mut self.w
+        &mut self.inner
     }
 
     #[inline]
