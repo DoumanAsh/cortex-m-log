@@ -25,7 +25,8 @@ install:
   - rustup target add $TARGET || true
 
 script:
-  - cargo test --target $TARGET --features semihosting,log-integration,itm
+  - cargo check --target $TARGET --features semihosting,log-integration,itm
+  - cargo test --features semihosting,log-integration,itm
 
 after_script:
   - set +e
