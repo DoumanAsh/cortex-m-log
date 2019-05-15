@@ -9,7 +9,7 @@
 //! use cortex_m_log::printer::Dummy;
 //!
 //! static LOGGER: Logger<Dummy> = Logger {
-//!     inner: Dummy,
+//!     inner: Dummy::new(),
 //!     level: log::LevelFilter::Off
 //! };
 //!

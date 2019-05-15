@@ -26,7 +26,7 @@
 //! use cortex_m_log::printer::Dummy;
 //!
 //! fn main() {
-//!     let mut log = Dummy;
+//!     let mut log = Dummy::new();
 //!     println!(log, "Some print with newline!");
 //!     //Debug version of print that resolves into nothing in release mode
 //!     //Note that you must import print macro for it to work
