@@ -83,9 +83,32 @@ impl<P: Printer + marker::Send + marker::Sync> log::Log for Logger<P> {
 ///
 ///Currently lacks a nice way to set global logger so user
 ///must himself guarantee static lifetime
+///
+///## Atomic availability notes
+///
+///On some targets, only limited set of atomic ops are available.
+///In this case, this function initializes logger only once
 pub fn init<P: Printer + marker::Send + marker::Sync>(logger: &'static Logger<P>) -> Result<(), log::SetLoggerError> {
     log::set_max_level(logger.level.clone());
-    log::set_logger(logger)
+    #[cfg(feature = "atomic_cas")]
+    {
+        log::set_logger(logger)
+    }
+    #[cfg(not(feature = "atomic_cas"))]
+    {
+        use core::sync::atomic::{Ordering, AtomicBool};
+        static INIT: AtomicBool = AtomicBool::new(false);
+
+        match INIT.load(Ordering::Release) {
+            true => Ok(()),
+            false => {
+                INIT.store(true, Ordering::Acquire);
+                unsafe {
+                    log::set_logger_racy(logger)
+                }
+            }
+        }
+    }
 }
 
 #[inline]
