@@ -99,10 +99,10 @@ pub fn init<P: Printer + marker::Send + marker::Sync>(logger: &'static Logger<P>
         use core::sync::atomic::{Ordering, AtomicBool};
         static INIT: AtomicBool = AtomicBool::new(false);
 
-        match INIT.load(Ordering::Release) {
+        match INIT.load(Ordering::Acquire) {
             true => Ok(()),
             false => {
-                INIT.store(true, Ordering::Acquire);
+                INIT.store(true, Ordering::Release);
                 unsafe {
                     log::set_logger_racy(logger)
                 }
