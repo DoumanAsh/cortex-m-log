@@ -74,8 +74,10 @@ impl<Mode: InterruptModer> super::Printer for ItmSync<Mode> {
     }
 }
 
-unsafe impl<Mode: InterruptModer> Sync for ItmSync<Mode> {
-}
+unsafe impl<Mode: InterruptModer> Sync for ItmSync<Mode> {}
+
+#[cfg(feature = "unsafe-itm")]
+unsafe impl<Mode: InterruptModer> Sync for Itm<Mode> {}
 
 /// Alias for Interrupt free Printer
 pub type InterruptFree = Itm<crate::modes::InterruptFree>;
