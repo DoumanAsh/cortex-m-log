@@ -84,7 +84,9 @@ pub struct ItmAssumeSync {
 }
 
 impl ItmAssumeSync {
-    ///Constructs new instance
+    ///Constructs new instance.
+    ///
+    ///This is unsafe, because type is assumed to be `Sync` while it is not.
     pub unsafe fn new(itm: destination::Itm) -> Self {
         Self { inner: itm }
     }
@@ -108,8 +110,8 @@ impl super::Printer for ItmAssumeSync {
     #[inline]
     ///Prints formatted output to destination with newline
     fn println(&mut self, args: fmt::Arguments) {
-            let _ = self.inner.write_fmt(args);
-            let _ = self.inner.write_str("\n");
+        let _ = self.inner.write_fmt(args);
+        let _ = self.inner.write_str("\n");
     }
 }
 
