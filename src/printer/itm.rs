@@ -74,8 +74,46 @@ impl<Mode: InterruptModer> super::Printer for ItmSync<Mode> {
     }
 }
 
-unsafe impl<Mode: InterruptModer> Sync for ItmSync<Mode> {
+unsafe impl<Mode: InterruptModer> Sync for ItmSync<Mode> {}
+
+/// ITM backed printer with the assumption of `Sync`
+/// This does *not* actually `Sync`'ronize access to the ITM
+/// For proper `Sync`, use `ItmSync`.
+pub struct ItmAssumeSync {
+    inner: destination::Itm,
 }
+
+impl ItmAssumeSync {
+    ///Constructs new instance
+    pub unsafe fn new(itm: destination::Itm) -> Self {
+        Self { inner: itm }
+    }
+}
+
+impl super::Printer for ItmAssumeSync {
+    type W = destination::Itm;
+    type M = crate::modes::InterruptOk;
+
+    #[inline]
+    fn destination(&mut self) -> &mut Self::W {
+        &mut self.inner
+    }
+
+    #[inline]
+    ///Prints formatted output to destination
+    fn print(&mut self, args: fmt::Arguments) {
+        let _ = self.inner.write_fmt(args);
+    }
+
+    #[inline]
+    ///Prints formatted output to destination with newline
+    fn println(&mut self, args: fmt::Arguments) {
+            let _ = self.inner.write_fmt(args);
+            let _ = self.inner.write_str("\n");
+    }
+}
+
+unsafe impl Sync for ItmAssumeSync {}
 
 /// Alias for Interrupt free Printer
 pub type InterruptFree = Itm<crate::modes::InterruptFree>;
