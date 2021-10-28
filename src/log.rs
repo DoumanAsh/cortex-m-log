@@ -27,23 +27,21 @@
 //! allocated logger to static, obviously unsafe.
 //!
 //! ```rust,no_run
-//! use std::mem;
+//! use core::mem;
 //!
 //! use cortex_m_log::log::{Logger, trick_init};
 //! use cortex_m_log::printer::semihosting;
 //! use cortex_m_log::modes::InterruptOk;
 //!
-//! fn main() {
-//!     let logger = Logger {
-//!         //Uses semihosting as destination with no interrupt control.
-//!         inner: semihosting::InterruptOk::<_>::stdout().expect("Get Semihosting stdout"),
-//!         level: log::LevelFilter::Info
-//!     };
-//!     //Haha trust me, it is safe ;)
-//!     //As long as logger is not dropped....
-//!     unsafe {
-//!         let _ = trick_init(&logger);
-//!     }
+//! let logger = Logger {
+//!     //Uses semihosting as destination with no interrupt control.
+//!     inner: semihosting::InterruptOk::<_>::stdout().expect("Get Semihosting stdout"),
+//!     level: log::LevelFilter::Info
+//! };
+//! //Haha trust me, it is safe ;)
+//! //As long as logger is not dropped....
+//! unsafe {
+//!     let _ = trick_init(&logger);
 //! }
 //! ```
 //!
@@ -89,7 +87,7 @@ impl<P: Printer + marker::Send + marker::Sync> log::Log for Logger<P> {
 ///On some targets, only limited set of atomic ops are available.
 ///In this case, this function initializes logger only once
 pub fn init<P: Printer + marker::Send + marker::Sync>(logger: &'static Logger<P>) -> Result<(), log::SetLoggerError> {
-    log::set_max_level(logger.level.clone());
+    log::set_max_level(logger.level);
     #[cfg(feature = "atomic_cas")]
     {
         log::set_logger(logger)

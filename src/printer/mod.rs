@@ -6,7 +6,9 @@ use crate::modes::{InterruptModer};
 
 ///Generic Printer trait
 pub trait Printer {
+    ///Writer type
     type W: fmt::Write;
+    ///Interrupt type
     type M: InterruptModer;
 
     ///Returns destination writer.

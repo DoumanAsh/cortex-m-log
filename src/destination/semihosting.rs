@@ -17,8 +17,12 @@ pub struct SH<T: SemihostingComp> {
 }
 
 impl<T: SemihostingComp> SH<T> {
-    pub fn new(typ: T) -> SH<T> {
-        Self { inner: typ }
+    #[inline]
+    ///Creates new instance
+    pub fn new(inner: T) -> SH<T> {
+        Self {
+            inner
+        }
     }
 }
 

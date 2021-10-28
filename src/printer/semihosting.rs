@@ -38,6 +38,7 @@ pub struct Semihosting<M: InterruptModer, T: SemihostingComp> {
 }
 
 impl<M: InterruptModer, T: SemihostingComp> Semihosting<M, T> {
+    #[inline(always)]
     ///Constructs new instance
     pub fn new(inner: T) -> Self {
         Self { inner, _mod: PhantomData }
@@ -45,16 +46,18 @@ impl<M: InterruptModer, T: SemihostingComp> Semihosting<M, T> {
 }
 
 impl<M: InterruptModer> Semihosting<M, hio::HStdout> {
+    #[inline(always)]
     ///Constructs new Semihosting Printer by using `HStdout`
     pub fn stdout() -> Result<Self, ()> {
-        hio::hstdout().map(|stdout| Self::new(stdout))
+        hio::hstdout().map(Self::new)
     }
 }
 
 impl<M: InterruptModer> Semihosting<M, hio::HStderr> {
+    #[inline(always)]
     ///Constructs new Semihosting Printer by using `HStderr`
     pub fn stderr() -> Result<Self, ()> {
-        hio::hstderr().map(|stderr| Self::new(stderr))
+        hio::hstderr().map(Self::new)
     }
 }
 
