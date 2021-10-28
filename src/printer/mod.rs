@@ -33,6 +33,9 @@ pub trait Printer {
     }
 }
 
+pub mod generic;
+pub use generic::GenericPrinter;
+
 pub mod dummy;
 pub use self::dummy::Dummy;
 
