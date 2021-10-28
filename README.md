@@ -1,6 +1,6 @@
 # cortex-m-log
 
-[![Build Status](https://travis-ci.org/DoumanAsh/cortex-m-log.svg?branch=master)](https://travis-ci.org/DoumanAsh/cortex-m-log)
+![Rust](https://github.com/DoumanAsh/cortex-m-log/workflows/Rust/badge.svg?branch=master)
 [![Crates.io](https://img.shields.io/crates/v/cortex-m-log.svg)](https://crates.io/crates/cortex-m-log)
 [![Documentation](https://docs.rs/cortex-m-log/badge.svg)](https://docs.rs/crate/cortex-m-log/)
 [![dependency status](https://deps.rs/repo/github/DoumanAsh/cortex-m-log/status.svg)](https://deps.rs/repo/github/DoumanAsh/cortex-m-log)
