@@ -25,3 +25,7 @@ impl<W: fmt::Write> super::Printer for GenericPrinter<W> {
         &mut self.writer
     }
 }
+
+//Because we use `InterruptFree` mode
+unsafe impl<W> Sync for GenericPrinter {
+}
