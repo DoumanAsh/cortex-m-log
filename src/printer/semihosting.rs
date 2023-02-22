@@ -45,17 +45,15 @@ impl<M: InterruptModer, T: SemihostingComp> Semihosting<M, T> {
     }
 }
 
-impl<M: InterruptModer> Semihosting<M, hio::HStdout> {
+impl<M: InterruptModer> Semihosting<M, hio::HostStream> {
     #[inline(always)]
-    ///Constructs new Semihosting Printer by using `HStdout`
+    ///Constructs new Semihosting Printer by using `hstdout`
     pub fn stdout() -> Result<Self, ()> {
         hio::hstdout().map(Self::new)
     }
-}
 
-impl<M: InterruptModer> Semihosting<M, hio::HStderr> {
     #[inline(always)]
-    ///Constructs new Semihosting Printer by using `HStderr`
+    ///Constructs new Semihosting Printer by using `hstderr`
     pub fn stderr() -> Result<Self, ()> {
         hio::hstderr().map(Self::new)
     }

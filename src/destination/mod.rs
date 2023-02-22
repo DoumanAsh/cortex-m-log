@@ -15,4 +15,4 @@ pub use self::itm::Itm;
 #[cfg(feature = "semihosting")]
 pub mod semihosting;
 #[cfg(feature = "semihosting")]
-pub use self::semihosting::{SHerr, SHout};
+pub use self::semihosting::SHStream;

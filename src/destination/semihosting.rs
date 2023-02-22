@@ -8,8 +8,7 @@ use core::fmt::Write;
 /// Trait implemented for writes that can be used with [SH](struct.SH.html)
 pub trait SemihostingComp: Write {}
 
-impl SemihostingComp for sh::hio::HStdout {}
-impl SemihostingComp for sh::hio::HStderr {}
+impl SemihostingComp for sh::hio::HostStream {}
 
 /// Semihosting destination
 pub struct SH<T: SemihostingComp> {
@@ -34,6 +33,4 @@ impl<T: SemihostingComp> Write for SH<T> {
 }
 
 /// Alias to semihosting's stdout
-pub type SHout = SH<sh::hio::HStdout>;
-/// Alias to semihosting's stderr
-pub type SHerr = SH<sh::hio::HStderr>;
+pub type SHStream = SH<sh::hio::HostStream>;

@@ -1,6 +1,6 @@
 [package]
 name = "cortex-m-log"
-version = "0.7.0"
+version = "0.8.0"
 authors = ["Douman <douman@gmx.se>"]
 keywords = ["arm", "cortex-m", "stm32", "log"]
 categories = ["no-std", "embedded"]
@@ -24,7 +24,7 @@ optional = true
 default-features = false
 
 [dependencies.cortex-m-semihosting]
-version = "0.3"
+version = "0.5"
 optional = true
 
 [features]
